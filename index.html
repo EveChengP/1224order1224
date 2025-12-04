@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>聖誕節聚餐點餐表</title>
+
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background: linear-gradient(#c9b7b4, #9d8f97); /* 莫蘭迪粉棕 */
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      width: 100%;
+      background-attachment: fixed;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.92);
+      padding: 35px;
+      border-radius: 22px;
+      width: 100%;
+      max-width: 520px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.18);
+      text-align: center;
+    }
+
+    .lights {
+      width: 100%;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .lights span {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      margin: 0 5px;
+      animation: blink 1.2s infinite alternate;
+    }
+    .red { background: #c97b7b; animation-delay: 0s; }
+    .green { background: #8aa39b; animation-delay: .3s; }
+    .yellow { background: #e7d8a1; animation-delay: .6s; }
+    @keyframes blink { from { opacity: .4; } to { opacity: 1; } }
+
+    h2 {
+      margin-bottom: 15px;
+      color: #7a6e6a;
+      font-size: 26px;
+      font-weight: bold;
+    }
+
+    label {
+      font-weight: 600;
+      display: block;
+      margin: 15px 0 8px;
+      color: #6b6460;
+      text-align: left;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid #c9c2be;
+      font-size: 15px;
+      background: #faf9f7;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      margin-top: 25px;
+      background: #b08b84;
+      color: #fff;
+      font-size: 18px;
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    button:hover {
+      background: #9d7b75;
+    }
+
+    .section-title {
+      margin-top: 25px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #8aa39b;
+      border-left: 5px solid #8aa39b;
+      padding-left: 10px;
+      text-align: left;
+    }
+
+    .snowflake {
+      position: fixed;
+      top: -10px;
+      color: white;
+      font-size: 1.2em;
+      animation: fall linear infinite;
+      opacity: 0.8;
+    }
+    @keyframes fall {
+      to { transform: translateY(110vh); }
+    }
+  </style>
+
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- 聖誕燈飾 ★ 已移入 container -->
+    <div class="lights">
+      <span class="red"></span>
+      <span class="green"></span>
+      <span class="yellow"></span>
+      <span class="red"></span>
+      <span class="green"></span>
+    </div>
+
+    <h2>🎄 聖誕節聚餐點餐表 🎅</h2>
+
+    <label>姓名：</label>
+    <input type="text" id="name" placeholder="請輸入您的姓名" />
+
+    <div class="section-title">主食</div>
+    <select id="main">
+      <option value="海鮮炆麵">海鮮炆麵</option>
+      <option value="XO醬楊州炒飯-叉燒">XO醬楊州炒飯-叉燒</option>
+      <option value="乾炒牛河">乾炒牛河</option>
+      <option value="香菇滑雞蒸飯">香菇滑雞蒸飯</option>
+    </select>
+
+    <div class="section-title">點心</div>
+    <select id="snack">
+      <option value="奶黃包三顆">奶黃包三顆</option>
+      <option value="點心組合">點心組合(韭菜餃+燒賣+芝麻球+奶黃包)</option>
+      <option value="蘿蔔糕三片">蘿蔔糕三片</option>
+      <option value="港式薄餅">港式薄餅</option>
+    </select>
+
+    <div class="section-title">甜點</div>
+    <select id="dessert">
+      <option value="楊枝甘露">楊枝甘露</option>
+      <option value="芝麻糊">芝麻糊</option>
+      <option value="芝麻糊奶酪">芝麻糊奶酪</option>
+      <option value="鳳梨奶酪">鳳梨奶酪</option>
+    </select>
+
+    <div class="section-title">飲料</div>
+    <select id="drink">
+      <option value="招牌奶茶">招牌奶茶</option>
+      <option value="特式鴛鴦">特式鴛鴦</option>
+      <option value="檸檬紅茶">檸檬紅茶</option>
+    </select>
+
+    <button onclick="submitForm()">送出訂單 🎁</button>
+  </div>
+
+<script>
+function submitForm() {
+  const name = document.getElementById('name').value;
+  const main = document.getElementById('main').value;
+  const snack = document.getElementById('snack').value;
+  const dessert = document.getElementById('dessert').value;
+  const drink = document.getElementById('drink').value;
+
+  fetch('https://script.google.com/macros/s/AKfycbx1SWMiQ5HuzI_1KgblbALTblEraogW6O-861WESVknEgh5-So56IhqOQ7kDfZQK-biLw/exec', {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name, main, snack, dessert, drink })
+  });
+
+  alert("已送出成功！🎄");
+}
+</script>
+
+<script>
+for (let i = 0; i < 25; i++) {
+  let snow = document.createElement('div');
+  snow.className = 'snowflake';
+  snow.innerHTML = '❄';
+  snow.style.left = Math.random() * 100 + 'vw';
+  snow.style.fontSize = (Math.random() * 10 + 10) + 'px';
+  snow.style.animationDuration = (Math.random() * 6 + 4) + 's';
+  document.body.appendChild(snow);
+}
+</script>
+
+</body>
+</html>
